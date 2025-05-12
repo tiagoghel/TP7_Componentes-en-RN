@@ -1,11 +1,14 @@
+
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, SafeAreaView,TextInput,ImageBackground,Button,TouchableOpacity,Pressable,flex} from 'react-native';
 
-const imagenTiago = requiere("./assets/Tiago.PNG")
+const imagenTiago = require("./assets/Tiago.png")
+const [Mensaje, CambiarMensaje] = React.useState('');
+const Aletar = (Mensaje) => {alert(Mensaje)}
 export default function App() {
   return (
     <View style={styles.container}>
-      
+    
       <StatusBar style="dark" />
 
       <ImageBackground
@@ -20,10 +23,15 @@ export default function App() {
     <TextInput
     style={styles.inputtext}
     placeholder='Ingrese un comentario'
+    onChangeText={CambiarMensaje}
+    value={Mensaje}
     >
-      
     </TextInput>
-
+    <TouchableOpacity style={styles.Button}
+    onPress={Aletar}
+    >
+      <Text>Contactar</Text>
+    </TouchableOpacity>
     </View>
   );
 }
