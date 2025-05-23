@@ -7,7 +7,9 @@ import {
   TextInput,
   Image,
   ImageBackground,
-  TouchableOpacity
+  TouchableOpacity,
+  Pressable,
+  SafeAreaView
 } from 'react-native';
 
 
@@ -19,17 +21,24 @@ const imagenTiago = {
   uri: 'https://ds-images.bolavip.com/news/image?src=https://images.bolavip.com/webp/cl/full/BCL_20250331_BCL_326557_palacios-carlos-2-1024x761_ed0a76e9.webp&width=1024&height=761',
 };
 
-export default function App() {
+ function App() {
+  let color ='red';
   const [Mensaje, CambiarMensaje] = useState('');
+  const [Newcolor, setColor] = useState(color);
 
   const Aletar = () => {
     alert(Mensaje);
   };
 
+  const VerPerfil = () => {
+    setColor((prevColor) =>
+      (prevColor) === color ? 'grey' : color );
+  };
+
   return (
     <View style={styles.container}>
+      <SafeAreaView style={styles.SafeAreaView}>
       <StatusBar style="light" />
-
       <ImageBackground
         source={imagenFondo}
         resizeMode="cover"
@@ -42,8 +51,8 @@ export default function App() {
             style={styles.Image}
           />
 
-          <Text style={styles.titulo}>Buen ser humano, mejor robot</Text>
-          <Text style={styles.nombre}>Tiago Ghelman</Text>
+          <Text style={[styles.titulo , {color : Newcolor }]}>Creador de juego</Text>
+          <Text style={styles.nombre}>Carlitos Palacios</Text>
 
           <TextInput
             style={styles.inputtext}
@@ -56,8 +65,13 @@ export default function App() {
           <TouchableOpacity style={styles.Button} onPress={Aletar}>
             <Text style={styles.ButtonText}>Contactar</Text>
           </TouchableOpacity>
+
+          <Pressable style={styles.VerPer} onPress={VerPerfil}>
+            <Text style={styles.Pressable}>VerPerfil</Text>
+          </Pressable>
         </View>
       </ImageBackground>
+      </SafeAreaView>
     </View>
   );
 }
@@ -108,9 +122,28 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
     paddingHorizontal: 25,
     borderRadius: 8,
+    padding:10,
+    marginTop:15,
   },
   ButtonText: {
     color: '#fff',
     fontWeight: 'bold',
   },
+  VerPer: {
+    backgroundColor: '#1112F5',
+    paddingVertical: 12,
+    paddingHorizontal: 25,
+    borderRadius: 8, padding:10,
+    marginTop:15,
+  },
+  Pressable:
+  {
+    color: '#fff',
+    fontWeight: 'bold',
+  },
+  SafeAreaView:{
+    flex:1,
+  }
 });
+
+export default App;
